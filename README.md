@@ -1,5 +1,5 @@
 ># `Upload SS`
->Upload screenshot via postman, after login with jwt auth
+>![image](https://github.com/user-attachments/assets/7e95f04f-e9a2-4a35-b212-5a7a4cad5210)
 
 ### Folder Structure
 ```
