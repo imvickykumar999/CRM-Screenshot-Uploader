@@ -1,5 +1,5 @@
 ># `Upload SS`
->![image](https://github.com/user-attachments/assets/7e95f04f-e9a2-4a35-b212-5a7a4cad5210)
+>![image](https://github.com/user-attachments/assets/9f0af40c-02af-48e0-ad61-3b167607b4f4)
 >![image](https://github.com/user-attachments/assets/3206eb4c-ca53-4513-9014-e18eac225155)
 
 ### Folder Structure
