@@ -38,7 +38,12 @@
                     "dataSrc": ""
                 },
                 "columns": [
-                    { "data": "filename" },
+                    { 
+                        "data": "filename",
+                        "render": function(data, type, row) {
+                            return `<a href="${row.url}" target="_blank">${data}</a>`;
+                        }
+                    },
                     { 
                         "data": "url",
                         "render": function(data, type, row) {
