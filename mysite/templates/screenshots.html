@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Screenshots</title>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">
+    <style>
+        table.dataTable {
+            width: 100%;
+        }
+        .dataTables_wrapper .dataTables_paginate .paginate_button {
+            padding: 0.5em 1em;
+        }
+    </style>
+</head>
+<body>
+    <h1>Screenshots</h1>
+    <table id="screenshots-table" class="display">
+        <thead>
+            <tr>
+                <th>Filename</th>
+                <th>Preview</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Data will be injected here by JavaScript -->
+        </tbody>
+    </table>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#screenshots-table').DataTable({
+                "ajax": {
+                    "url": "/ss_api/",
+                    "dataSrc": ""
+                },
+                "columns": [
+                    { "data": "filename" },
+                    { 
+                        "data": "url",
+                        "render": function(data, type, row) {
+                            return `<img src="${data}" alt="${row.filename}" style="width: 100px;">`;
+                        }
+                    }
+                ]
+            });
+        });
+    </script>
+</body>
+</html>

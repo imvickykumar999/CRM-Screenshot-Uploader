@@ -1,10 +1,10 @@
 {
 	"info": {
-		"_postman_id": "7fe21d54-f6c3-45b3-ad27-9b4254af423f",
+		"_postman_id": "a5e4b873-4034-4bb6-b3d6-f6071172de8a",
 		"name": "flask-upload",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "34005341",
-		"_collection_link": "https://warped-comet-915880.postman.co/workspace/Team-Workspace~021e59ad-6229-436e-8a1a-b8db03fab185/collection/34005341-7fe21d54-f6c3-45b3-ad27-9b4254af423f?action=share&source=collection_link&creator=34005341"
+		"_exporter_id": "14965750",
+		"_collection_link": "https://gold-trinity-363196.postman.co/workspace/GitHub-Views-Tracker~d48918f1-45f9-4583-b551-b9e5c7e535d1/collection/14965750-a5e4b873-4034-4bb6-b3d6-f6071172de8a?action=share&source=collection_link&creator=14965750"
 	},
 	"item": [
 		{
@@ -28,15 +28,13 @@
 					]
 				},
 				"url": {
-					"raw": "http://127.0.0.1:5000/api/user/register",
-					"protocol": "http",
+					"raw": "https://vickscrm.pythonanywhere.com/api/user/register",
+					"protocol": "https",
 					"host": [
-						"127",
-						"0",
-						"0",
-						"1"
+						"vickscrm",
+						"pythonanywhere",
+						"com"
 					],
-					"port": "5000",
 					"path": [
 						"api",
 						"user",
@@ -67,15 +65,13 @@
 					]
 				},
 				"url": {
-					"raw": "http://127.0.0.1:5000/api/user/login",
-					"protocol": "http",
+					"raw": "https://vickscrm.pythonanywhere.com/api/user/login",
+					"protocol": "https",
 					"host": [
-						"127",
-						"0",
-						"0",
-						"1"
+						"vickscrm",
+						"pythonanywhere",
+						"com"
 					],
-					"port": "5000",
 					"path": [
 						"api",
 						"user",
@@ -93,7 +89,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InZpY2t5IiwiZXhwIjoxNzIyMzMwMjcyfQ.5TVoCFNkYy0DTAc6lmFEVEJCCszlojIwW13J4qA-Fu0",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6InZpY2t5IiwiZXhwIjoxNzI2NDk0Mzk0fQ.yShBLmFzIhmDahXq6AivIRjCi-rcAxiFzPPlmSroBho",
 							"type": "string"
 						}
 					]
@@ -106,20 +102,18 @@
 						{
 							"key": "file",
 							"type": "file",
-							"src": "/home/newbol7/PycharmProjects/autoscreenshot/screenshots/newbol7_29072024_142941.png"
+							"src": "postman-cloud:///1ef73690-caad-4fa0-ac0c-97ba24a9a511"
 						}
 					]
 				},
 				"url": {
-					"raw": "http://127.0.0.1:5000/api/user/upload_screenshot",
-					"protocol": "http",
+					"raw": "https://vickscrm.pythonanywhere.com/api/user/upload_screenshot",
+					"protocol": "https",
 					"host": [
-						"127",
-						"0",
-						"0",
-						"1"
+						"vickscrm",
+						"pythonanywhere",
+						"com"
 					],
-					"port": "5000",
 					"path": [
 						"api",
 						"user",
