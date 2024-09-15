@@ -1,12 +1,57 @@
 from flask import Flask, request, jsonify, render_template
 import jwt
 import datetime
+import sqlite3
+import os
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'your_secret_key'
 
-# Sample data for users
-users = {}
+# Database setup
+db_path = 'user_credentials.db'
+
+def init_db():
+    """Initialize the database."""
+    if not os.path.exists(db_path):
+        conn = sqlite3.connect(db_path)
+        cursor = conn.cursor()
+        cursor.execute('''
+            CREATE TABLE IF NOT EXISTS users (
+                username TEXT PRIMARY KEY,
+                password TEXT NOT NULL
+            )
+        ''')
+        conn.commit()
+        conn.close()
+
+init_db()
+
+def hash_password(password):
+    """Hash a password using SHA-256."""
+    import hashlib
+    return hashlib.sha256(password.encode()).hexdigest()
+
+def get_user_password(username):
+    """Fetch the hashed password for a given username."""
+    conn = sqlite3.connect(db_path)
+    cursor = conn.cursor()
+    cursor.execute('SELECT password FROM users WHERE username = ?', (username,))
+    result = cursor.fetchone()
+    conn.close()
+    return result[0] if result else None
+
+def save_user(username, hashed_password):
+    """Save a new user to the database."""
+    conn = sqlite3.connect(db_path)
+    cursor = conn.cursor()
+    try:
+        cursor.execute('INSERT INTO users (username, password) VALUES (?, ?)', (username, hashed_password))
+        conn.commit()
+    except sqlite3.IntegrityError:
+        return False
+    finally:
+        conn.close()
+    return True
 
 @app.route('/')
 def index():
@@ -16,19 +61,25 @@ def index():
 def register():
     username = request.form.get('username')
     password = request.form.get('password')
+    
     if not username or not password:
         return jsonify({"message": "Username and password are required"}), 400
-    if username in users:
+
+    hashed_password = hash_password(password)
+    if save_user(username, hashed_password):
+        return jsonify({"message": "User registered successfully"}), 201
+    else:
         return jsonify({"message": "User already exists"}), 400
-    users[username] = password
-    return jsonify({"message": "User registered successfully"}), 201
 
 @app.route('/api/user/login', methods=['POST'])
 def login():
     username = request.form.get('username')
     password = request.form.get('password')
 
-    if username in users and users[username] == password:
+    hashed_password = hash_password(password)
+    stored_password = get_user_password(username)
+
+    if stored_password and hashed_password == stored_password:
         token = jwt.encode({
             'username': username,
             'exp': datetime.datetime.utcnow() + datetime.timedelta(hours=24)
@@ -67,4 +118,3 @@ def upload_screenshot():
 
 if __name__ == '__main__':
     app.run(debug=True)
-
