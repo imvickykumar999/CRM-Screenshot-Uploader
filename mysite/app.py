@@ -53,7 +53,7 @@ def save_user(username, hashed_password):
         conn.close()
     return True
 
-@app.route('/')
+@app.route('/ss')
 def index():
     return render_template('index.html')
 
@@ -132,7 +132,7 @@ def get_screenshots():
     
     return jsonify(screenshots)
 
-@app.route('/ss')
+@app.route('/')
 def screenshots():
     return render_template('screenshots.html')
 
