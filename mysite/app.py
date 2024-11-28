@@ -5,10 +5,10 @@ import sqlite3
 import os
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = 'your_secret_key'
+app.config['SECRET_KEY'] = os.urandom(24)
 
 # Database setup
-db_path = 'mysite/user_credentials.db'
+db_path = 'user_credentials.db'
 
 def init_db():
     """Initialize the database."""
@@ -113,13 +113,13 @@ def upload_screenshot():
     if file.filename == '':
         return jsonify({"message": "No selected file"}), 400
 
-    file.save(f"mysite/static/images/{file.filename}")
+    file.save(f"static/images/{file.filename}")
     return jsonify({"message": "File uploaded successfully"}), 200
 
 @app.route('/ss_api/', methods=['GET'])
 def get_screenshots():
     """Fetch all uploaded screenshots and return as JSON."""
-    screenshots_folder = 'mysite/static/images/'
+    screenshots_folder = 'static/images/'
     screenshots = []
     
     # List all files in the screenshots folder

@@ -1,0 +1,6 @@
+flask
+requests
+pyyaml
+pyautogui
+pillow
+pyjwt
