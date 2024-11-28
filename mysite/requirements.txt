@@ -4,3 +4,4 @@ pyyaml
 pyautogui
 pillow
 pyjwt
+schedule
