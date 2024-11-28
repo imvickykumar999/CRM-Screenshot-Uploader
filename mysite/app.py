@@ -130,6 +130,7 @@ def get_screenshots():
                 'url': f'/static/images/{filename}'
             })
     
+    screenshots.reverse()
     return jsonify(screenshots)
 
 @app.route('/')
