@@ -1,0 +1,6 @@
+requests
+pyyaml
+pyautogui
+pillow
+pyjwt
+schedule
