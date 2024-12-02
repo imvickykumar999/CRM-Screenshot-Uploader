@@ -7,7 +7,7 @@ import schedule
 
 # Configuration
 SAVE_DIR = os.path.join(os.getcwd(), "media/screenshots")  # Ensure absolute path
-UPLOAD_URL = "http://localhost:5000/api/upload_screenshot"
+UPLOAD_URL = "http://192.168.1.18:5000/api/upload_screenshot"
 # UPLOAD_URL = "https://vickscrmss.pythonanywhere.com/api/upload_screenshot" 
 
 # Ensure the directory for saving screenshots exists
