@@ -1,0 +1,60 @@
+{
+	"info": {
+		"_postman_id": "3d418503-e7e5-4998-8817-caa979a6e5d5",
+		"name": "ScreenShotUploader",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "38345649"
+	},
+	"item": [
+		{
+			"name": "GetScreenShots",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://serverclientcrm.pythonanywhere.com/",
+					"protocol": "https",
+					"host": [
+						"serverclientcrm",
+						"pythonanywhere",
+						"com"
+					],
+					"path": [
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UploadScreenShot",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "file",
+							"type": "file",
+							"src": "postman-cloud:///1efb3d35-3f8a-4450-96d1-f0c73b335096"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://serverclientcrm.pythonanywhere.com/upload_screenshot",
+					"protocol": "https",
+					"host": [
+						"serverclientcrm",
+						"pythonanywhere",
+						"com"
+					],
+					"path": [
+						"upload_screenshot"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
