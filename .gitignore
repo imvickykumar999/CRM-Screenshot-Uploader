@@ -1,3 +1,4 @@
 *.pyc
 DjangoCRM/media/screenshots/
 FlaskAuthCRM/static/images/
+IpWebCamSS/media/
