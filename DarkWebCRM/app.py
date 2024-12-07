@@ -50,7 +50,7 @@ def list_screenshots():
                 'filename': filename,
                 'url': f"/media/screenshots/{filename}"
             })
-    screenshots.reverse()
+    # screenshots.reverse()
     return jsonify(screenshots)
 
 @app.route('/', methods=['GET'])

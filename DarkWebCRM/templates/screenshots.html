@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="refresh" content="20"> <!-- Refresh every 20 seconds -->
+
     <title>Screenshots</title>
     <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
@@ -113,7 +115,7 @@
             }
         `;
         document.head.appendChild(style);
-
+        
         $(document).ready(function() {
             $('#screenshots-table').DataTable({
                 "ajax": {
@@ -133,7 +135,8 @@
                             return `<img src="${data}" alt="${row.filename}" style="width: 120px;">`;
                         }
                     }
-                ]
+                ],
+                "order": [[0, "desc"]]
             });
         });
     </script>

