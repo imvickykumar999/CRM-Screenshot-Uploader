@@ -6,34 +6,36 @@ from datetime import datetime
 import schedule
 
 SAVE_DIR = os.path.join(os.getcwd(), "media")  # Ensure absolute path
-UPLOAD_URL = "http://127.0.0.1:5000/upload_screenshot"
-# UPLOAD_URL = "https://crmss.pythonanywhere.com/upload_screenshot" 
+#UPLOAD_URL = "http://127.0.0.1:5000/upload_screenshot"
+UPLOAD_URL = "https://crmss.pythonanywhere.com/upload_screenshot" 
 os.makedirs(SAVE_DIR, exist_ok=True)
 
+# Initialize the camera immediately after imports
+camera = cv2.VideoCapture(0)  # 0 is the default camera index
+if not camera.isOpened():
+    raise Exception("Error: Unable to access the camera. Please check if it's connected.")
+
+# Add a warm-up time for the camera
+print("Warming up the camera...")
+time.sleep(2)  # Allow the camera to adjust
+camera.read()
+print("Camera ready!")
+
 def take_camera_photo():
-    """Take a photo using the camera and save it locally."""
+    """Capture a photo using the open camera and save it locally."""
+    global camera
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
     filepath = os.path.join(SAVE_DIR, f"photo_{timestamp}.png")
     
-    # Initialize the camera
-    cap = cv2.VideoCapture(0)  # 0 is the default camera index
-    if not cap.isOpened():
-        print("Error: Could not access the camera.")
-        return None
-    
     # Capture a single frame
-    ret, frame = cap.read()
+    ret, frame = camera.read()
     if ret:
         cv2.imwrite(filepath, frame)
         print(f"Photo saved to {filepath}")
     else:
-        print("Error: Could not capture photo.")
+        print("Error: Failed to capture photo.")
         filepath = None
-    
-    # Release the camera
-    cap.release()
-    cv2.destroyAllWindows()
-    
+
     return filepath
 
 def upload_screenshot(filepath):
@@ -56,7 +58,16 @@ def job():
     upload_screenshot(filepath)
 
 schedule.every(10).seconds.do(job)
-print("Starting the auto-camera photo uploader...")
-while True:
-    schedule.run_pending()
-    time.sleep(1)
+
+try:
+    print("Starting the auto-camera photo uploader...")
+    while True:
+        schedule.run_pending()
+        time.sleep(1)
+except KeyboardInterrupt:
+    print("\nExiting...")
+finally:
+    # Release the camera when the program exits
+    if camera.isOpened():
+        camera.release()
+    cv2.destroyAllWindows()
