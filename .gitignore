@@ -3,3 +3,5 @@ DjangoCRM/media/screenshots/
 FlaskAuthCRM/static/images/
 IpWebCamSS/media/
 FlaskCRMss/crmss/media/screenshots/
+DarkWebCRM/media/screenshots/
+DarkWebCRM/HiddenServiceDir/hs_ed25519_secret_key
