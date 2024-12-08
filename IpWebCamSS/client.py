@@ -6,20 +6,26 @@ from datetime import datetime
 import schedule
 
 SAVE_DIR = os.path.join(os.getcwd(), "media")  # Ensure absolute path
-#UPLOAD_URL = "http://127.0.0.1:5000/upload_screenshot"
-UPLOAD_URL = "https://crmss.pythonanywhere.com/upload_screenshot" 
+UPLOAD_URL = "http://127.0.0.1:5000/upload_screenshot"
+
+# UPLOAD_URL = "https://crmss.pythonanywhere.com/upload_screenshot" 
 os.makedirs(SAVE_DIR, exist_ok=True)
 
+# IP_WEBCAM_URL = "http://192.168.0.108:8080/video"
+IP_WEBCAM_URL = "http://211.132.61.124/mjpg/video.mjpg"
+
+# IP_WEBCAM_URL = 0 # here, 0 is the default camera index
+camera = cv2.VideoCapture(IP_WEBCAM_URL)
+
 # Initialize the camera immediately after imports
-camera = cv2.VideoCapture(0)  # 0 is the default camera index
 if not camera.isOpened():
     raise Exception("Error: Unable to access the camera. Please check if it's connected.")
 
 # Add a warm-up time for the camera
-print("Warming up the camera...")
+print("\nWarming up the camera...")
 time.sleep(2)  # Allow the camera to adjust
 camera.read()
-print("Camera ready!")
+print("Camera ready!\n")
 
 def take_camera_photo():
     """Capture a photo using the open camera and save it locally."""
