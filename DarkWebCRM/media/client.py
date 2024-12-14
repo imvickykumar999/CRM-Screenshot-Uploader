@@ -20,7 +20,7 @@ def take_screenshot():
     """Take a screenshot and save it locally."""
     try:
         timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-        filepath = os.path.join(SAVE_DIR, f"screenshot_{timestamp}.png")
+        filepath = os.path.join(SAVE_DIR, f"{timestamp}.png")
         screenshot = ImageGrab.grab()
         screenshot.save(filepath, "PNG")
         print(f"\nScreenshot saved to {filepath}")
