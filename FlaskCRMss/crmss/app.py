@@ -42,6 +42,19 @@ def upload_screenshot():
         "url": f"/media/screenshots/{file.filename}"
     })
 
+@app.route('/api_screenshots', methods=['GET'])
+def api_screenshots():
+    """Fetch and display uploaded screenshots."""
+    screenshots = []
+    for filename in os.listdir(app.config['UPLOAD_FOLDER']):
+        if filename.endswith(('jpg', 'jpeg', 'png', 'gif')):
+            screenshots.append({
+                'filename': filename,
+                'url': f"/media/screenshots/{filename}"
+            })
+    screenshots.reverse()
+    return jsonify(screenshots)
+
 @app.route('/list_screenshots', methods=['GET'])
 def list_screenshots():
     search_query = request.args.get('search', '').lower()
@@ -89,6 +102,11 @@ def home():
     # Sort images by date descending
     screenshots.sort(key=lambda x: x['url'], reverse=True)
     return render_template('index.html', images=screenshots)
+
+@app.route('/datatable', methods=['GET'])
+def render_screenshots_page():
+    """Render the HTML page for displaying screenshots."""
+    return render_template('screenshots.html')
 
 @app.route('/media/screenshots/<filename>')
 def serve_screenshot(filename):
